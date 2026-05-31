@@ -15,7 +15,7 @@ def run_task():
     
     try:
         # 2. 获取数据 (传入动态的 frequency 变量)
-        df = get_price(target_stock, frequency=frequency)
+        df = get_price(target_stock, frequency=frequency, count=99999)
         
         if df is None or df.empty:
             print(f"未能获取到 {target_stock} 的数据，请检查代码输入是否正确。")
