@@ -14,6 +14,20 @@ on:
         description: '请输入起始日期 (格式: YYYY-MM-DD)'
         required: true
         default: '2024-09-18'
+      # 【新增】周期选择下拉菜单
+      frequency:
+        description: '请选择K线周期'
+        required: true
+        default: '1d'
+        type: choice
+        options:
+          - '1d'
+          - '1w'
+          - '1m'
+          - '5m'
+          - '15m'
+          - '30m'
+          - '60m'
 
 jobs:
   build:
@@ -35,6 +49,8 @@ jobs:
         env:
           STOCK_CODE: ${{ github.event.inputs.stock_code }}
           START_DATE: ${{ github.event.inputs.start_date }}
+          # 【新增】将用户选择的周期传递给环境变量项
+          FREQUENCY: ${{ github.event.inputs.frequency }}
         run: python main.py
 
       - name: 保存结果到云端
